@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Loading from './Loading';
 import Error from './Error';
 import RaceOptions from './RaceOptions';
@@ -17,7 +15,11 @@ const FullSeason = () => {
     return races.map((race) => {
       return (
         <div key={`key${race.round}`}>
-          <RaceOptions key={race.round} race={race} initialVisibility={toggleStatus} />
+          <RaceOptions
+            key={race.round}
+            race={race}
+            initialVisibility={toggleStatus}
+          />
         </div>
       );
     });
@@ -27,10 +29,10 @@ const FullSeason = () => {
   if (error) return <Error message={error.message} />;
 
   return (
-    <div className="season">
+    <div className='season'>
       <h2>The {season[0].season} Formula 1 Season</h2>
       {listRaces(season)}
-      <div className="separator" />
+      <div className='separator' />
     </div>
   );
 };

@@ -1,12 +1,10 @@
-import React from 'react';
-
 type ErrorProps = {
   message: string;
 };
 
 const Error = ({ message }: ErrorProps) => {
   return (
-    <div className="load-error">
+    <div className='load-error'>
       <p>
         There was some sort of problem.
         <br />

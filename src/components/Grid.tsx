@@ -1,5 +1,3 @@
-import React from 'react';
-
 import NoData from './NoData';
 import { useGrid } from '../api/grid';
 import ApiStatus from './ApiStatus';
@@ -13,7 +11,8 @@ type GridProps = {
 const Grid = ({ season, round }: GridProps) => {
   const { data: gridData, error, isLoading } = useGrid(season, round);
 
-  if (isLoading || error) return <ApiStatus isLoading={isLoading} error={error} />;
+  if (isLoading || error)
+    return <ApiStatus isLoading={isLoading} error={error} />;
 
   const grid = gridData ? gridData.gridData : null;
 
@@ -21,7 +20,7 @@ const Grid = ({ season, round }: GridProps) => {
     return fullGrid.map((driver, i) => {
       return (
         <tr key={driver.surname || i}>
-          <td className="position">
+          <td className='position'>
             <strong>{driver.grid}</strong>
           </td>
           <td>
@@ -39,7 +38,7 @@ const Grid = ({ season, round }: GridProps) => {
 
   const buildGridTable = () => {
     return (
-      <div className="content">
+      <div className='content'>
         <h2>
           {gridData?.year} {gridData?.raceName}
         </h2>
@@ -47,7 +46,9 @@ const Grid = ({ season, round }: GridProps) => {
         <table>
           <thead>
             <tr>
-              <th className="position">{window.innerWidth < 450 ? 'Pos' : 'Position'}</th>
+              <th className='position'>
+                {window.innerWidth < 450 ? 'Pos' : 'Position'}
+              </th>
               <th>Driver</th>
               <th>Team</th>
             </tr>
@@ -58,7 +59,11 @@ const Grid = ({ season, round }: GridProps) => {
     );
   };
 
-  return <div className="grid sub-section">{gridData && grid ? buildGridTable() : <NoData />}</div>;
+  return (
+    <div className='grid sub-section'>
+      {gridData && grid ? buildGridTable() : <NoData />}
+    </div>
+  );
 };
 
 export default Grid;

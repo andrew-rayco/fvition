@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useResults } from '../api/results';
 import ApiStatus from './ApiStatus';
 import { ResultsData } from '../types/api';
@@ -10,14 +10,18 @@ type ResultsProps = {
 };
 
 const Results = ({ season, round }: ResultsProps) => {
-  const [isLapTimes, setIsLapTimes] = React.useState(false);
-  const [fastestLap, setFastestLap] = React.useState('0');
-  const [lapsInRace, setLapsInRace] = React.useState('0');
+  const [isLapTimes, setIsLapTimes] = useState(false);
+  const [fastestLap, setFastestLap] = useState('0');
+  const [lapsInRace, setLapsInRace] = useState('0');
   const { data: results, error, isLoading } = useResults(season, round);
 
   useEffect(() => {
-    let resultsArray = results?.results;
-    if (resultsArray && resultsArray[0].fastestLapTime && resultsArray[0].fastestLapTime !== '-') {
+    const resultsArray = results?.results;
+    if (
+      resultsArray &&
+      resultsArray[0].fastestLapTime &&
+      resultsArray[0].fastestLapTime !== '-'
+    ) {
       setIsLapTimes(true);
       const fastestLapTime = findFastestLap(resultsArray);
       setFastestLap(fastestLapTime);
@@ -47,7 +51,7 @@ const Results = ({ season, round }: ResultsProps) => {
 
       return (
         <tr key={surname + position}>
-          <td className="position">
+          <td className='position'>
             <strong>{position}</strong>
           </td>
           <td>
@@ -64,14 +68,16 @@ const Results = ({ season, round }: ResultsProps) => {
             ) : (
               <div>
                 {status}
-                <span className="muted sub-text">{Number(laps) + 1}</span>
+                <span className='muted sub-text'>{Number(laps) + 1}</span>
               </div>
             )}
           </td>
           {isLapTimes && (
-            <td className="optional">
+            <td className='optional'>
               {highlightFastestLap(fastestLapTime)}
-              <span className="muted sub-text">{fastestLapNumber && `${fastestLapNumber}`}</span>
+              <span className='muted sub-text'>
+                {fastestLapNumber && `${fastestLapNumber}`}
+              </span>
             </td>
           )}
         </tr>
@@ -86,7 +92,7 @@ const Results = ({ season, round }: ResultsProps) => {
 
   const buildResultsTable = (resultsArray: ResultsData[]) => {
     return (
-      <div className="content">
+      <div className='content'>
         <h2>
           {raceYear} {raceName}
         </h2>
@@ -95,11 +101,13 @@ const Results = ({ season, round }: ResultsProps) => {
         <table>
           <thead>
             <tr>
-              <th className="position">{document.body.clientWidth < 450 ? 'Pos' : 'Position'}</th>
+              <th className='position'>
+                {document.body.clientWidth < 450 ? 'Pos' : 'Position'}
+              </th>
               <th>Driver</th>
               <th>Team</th>
               <th>Race Time</th>
-              {isLapTimes ? <th className="optional">Fastest lap</th> : null}
+              {isLapTimes ? <th className='optional'>Fastest lap</th> : null}
             </tr>
           </thead>
           <tbody>{listResults(resultsArray)}</tbody>
@@ -108,7 +116,11 @@ const Results = ({ season, round }: ResultsProps) => {
     );
   };
 
-  return <div className="results sub-section">{resultsArray && buildResultsTable(resultsArray)}</div>;
+  return (
+    <div className='results sub-section'>
+      {resultsArray && buildResultsTable(resultsArray)}
+    </div>
+  );
 };
 
 export default Results;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Loading from './Loading';
 import { useCircuits } from '../api/circuits';
 import { Circuit } from '../types/api';
@@ -8,7 +6,7 @@ const Circuits = () => {
   const { data: circuits, error, isLoading } = useCircuits();
 
   const listCircuits = (circuitsObj: Circuit[]) => {
-    let circuits = Array.from(circuitsObj);
+    const circuits = Array.from(circuitsObj);
     return circuits.map((track) => {
       const location = track.Location;
       return (
@@ -49,10 +47,14 @@ const Circuits = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="circuit-list">
+    <div className='circuit-list'>
       <h2>Circuits</h2>
       <h4>Every circuit in the history of Formula 1</h4>
-      {circuits && circuits.length ? renderCircuitTable() : <div>{error?.message}</div>}
+      {circuits && circuits.length ? (
+        renderCircuitTable()
+      ) : (
+        <div>{error?.message}</div>
+      )}
     </div>
   );
 };

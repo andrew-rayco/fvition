@@ -1,10 +1,9 @@
-import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const location = useLocation();
 
-  let path = location.pathname.substr(1).split('/');
+  const path = location.pathname.substr(1).split('/');
   let seasonUrl;
 
   // if (path.indexOf('visualise') >= 0) {
