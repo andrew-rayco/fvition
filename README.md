@@ -2,6 +2,8 @@
 
 F1ian is a web app that provides Formula 1 enthusiasts a quick and pleasant way to access historical F1 results. Originally built with Create React App (CRA) and React, it has been modernized using Vite and TypeScript for improved performance and developer experience.
 
+![F1ian screenshot](f1ian-screenshot.png)
+
 The results of every F1 race, including qualifying (where data exists) and starting grid, and a complete list of Formula 1 circuits old and new.
 
 ## Demo
@@ -46,6 +48,10 @@ To run F1ian locally, follow these steps:
 - `yarn build`: Builds the application for production.
 - `yarn preview`: Previews the production build locally.
 - `yarn lint`: Runs ESLint to analyze code for potential errors.
+
+### Deployment
+
+The app is continuously deployed on Vercel, with each commit to the main branch automatically initiating a production build and deployment.
 
 ## Data Source
 
